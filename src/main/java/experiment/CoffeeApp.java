@@ -25,9 +25,17 @@ public class CoffeeApp {
                 .builder()
                 .myModule(hyperModule)
                 .build();
+        // Module subclass
+        MyModule hyperModuleSub = new HyperMyModule(Executors.newSingleThreadExecutor());
+        CoffeeShop hyperCoffeeShopSub = DaggerCoffeeShop
+                .builder()
+                .myModule(hyperModuleSub)
+                .build();
         hyperCoffeeShop.inject(this);
         hyperCoffeeShop.maker().make();
         hyperCoffeeShop.maker().make();
+        hyperCoffeeShopSub.maker().make();
+
         electricCoffeeShop.maker().make();
         maker.make();
         heater.heat();
